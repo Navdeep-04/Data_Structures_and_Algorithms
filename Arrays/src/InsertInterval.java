@@ -11,19 +11,26 @@ public class InsertInterval {
     public static int[][] insert(int[][] intervals, int[] newInterval) {
         List<int[]> result = new ArrayList<>();
         for (int[] interval : intervals) {
-            if (newInterval[1] < interval[0]) {
-                result.add(newInterval);
-                newInterval = interval;
-
-            }
-            else if (interval[1] < newInterval[0]) {
+            // CASE 1: Current interval is before newInterval
+            // No overlap, so directly add current interval
+            if (interval[1] < newInterval[0]){
                 result.add(interval);
             }
-            else {
-                newInterval[0] = Math.min(newInterval[0], interval[0]);
-                newInterval[1] = Math.max(newInterval[1], interval[1]);
+            // CASE 2: New interval is before current interval
+            // Add newInterval and move current interval into newInterval
+            else if(newInterval[1] < interval[0]){
+                result.add(newInterval);
+                // Update newInterval to the current interval
+                newInterval = interval;
+            }
+            else{
+                // CASE 3: Both intervals overlap
+                // Merge them into one larger interval
+                newInterval[0] = Math.min(interval[0], newInterval[0]);
+                newInterval[1] = Math.max(interval[1], newInterval[1]);
             }
         }
+        // Add the last remaining interval
         result.add(newInterval);
         return result.toArray(new int[result.size()][]);
     }

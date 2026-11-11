@@ -1,23 +1,32 @@
-import java.sql.SQLOutput;
-import java.util.Arrays;
-
-public class ReverseWordsInStrings {
+import java.util.*;
+public class ReverseWordsInStrings
+{
     public static void main(String[] args) {
-        String str = "  hello world  ";
-        String result = reverseStr(str);
-        System.out.println(result);
-    }
-    static String reverseStr(String s) {
-        StringBuilder str = new StringBuilder();
-        String[] str1 = s.split(" ");
-        for (int i = str1.length - 1; i >= 0; i--) {
-            if(i > 0 && !str1[i].equals("")){
-            str.append(str1[i].trim()).append(" ");
+        String str = "  the   sky is blue  ";
+        StringBuilder  result = new StringBuilder();
+        int n = str.length();
+        int i = 0;
+        while(i < n){
+            // Search first non-space character
+            while(i < n && str.charAt(i) == ' '){
+                i++;
+            }
+            if (i >= n){
+                break;
+            }
+            int j = i + 1;
+            while(j < n && str.charAt(j) != ' '){
+                j++;
+            }
+            String Sub = str.substring(i, j);
+            if(result.length() == 0){
+                result.append(Sub);
             }
             else{
-                str.append(str1[i].trim());
+                result.insert(0,Sub+" ");
             }
+            i = j + 1;
         }
-        return String.valueOf(str);
+        System.out.println(result);
     }
 }

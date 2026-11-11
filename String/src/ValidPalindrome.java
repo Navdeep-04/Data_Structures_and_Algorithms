@@ -1,10 +1,10 @@
 public class ValidPalindrome {
     public static void main(String[] args) {
         String str = "A man, a plan, a canal: Panama";
-        String str2 = "";
+        StringBuilder str2 = new StringBuilder();
         for(char i : str.toCharArray()){
             if(Character.isLetter(i) || Character.isDigit(i)){
-                str2 += Character.toLowerCase(i);
+                str2.append(Character.toLowerCase(i));
             }
         }
         System.out.println(str2);
