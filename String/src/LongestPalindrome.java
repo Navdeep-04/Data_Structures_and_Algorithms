@@ -1,5 +1,4 @@
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 public class LongestPalindrome {
     public static void main(String[] args) {
         String s = "bananas";
@@ -12,17 +11,16 @@ public class LongestPalindrome {
                 System.out.println(hash[i]);
             }
         }
-
         boolean flag = false;
         int res = 0;
         for(int i: hash){
             if(i % 2 == 0){
-                res += (i/2);
+                res += i;
             } else {
-                flag =true;
-                res += (i-1)/2;
+                flag = true;
+                res += i - 1;
             }
         }
-        System.out.println(flag ? (res * 2) + 1 : res * 2);
+        System.out.println(flag ? (res) + 1 : res);
     }
 }

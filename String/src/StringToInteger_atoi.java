@@ -1,0 +1,27 @@
+public class StringToInteger_atoi {
+    public static void main(String[] args) {
+        String s = "1042";
+        int result = atoi(s);
+        System.out.println(result);
+    }
+    public static int atoi(String s){
+        int i = 0, result = 0, sign = 1;
+
+        if (s.length() == 0) return 0;
+
+        while (i < s.length() && s.charAt(i) == ' ') i++;
+
+        if (i < s.length() && (s.charAt(i) == '+' || s.charAt(i) == '-'))
+            sign = (s.charAt(i++) == '-') ? -1 : 1;
+
+        while (i < s.length() && s.charAt(i) >= '0' && s.charAt(i) <= '9'){
+
+            if (result > Integer.MAX_VALUE / 10 ||
+                    (result == Integer.MAX_VALUE / 10 && s.charAt(i) - '0' > Integer.MAX_VALUE % 10))
+                    return (sign == 1) ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+
+            result = result * 10 + (s.charAt(i++) - '0');
+        }
+        return result * sign;
+    }
+}
